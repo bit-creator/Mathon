@@ -1,0 +1,180 @@
+#!/bin/bash
+
+# 
+# cmake build recieved error like a:
+# 
+# > fatal error: module '_Builtin_stddef_max_align_t' is defined in both
+#   '/home/user/.cache/clang/ModuleCache/1ZQ7RBKO4A6V0/_Builtin_stddef_max_align_t-1KLR31KNJ6263.pcm' and
+#   '/home/user/.cache/clang/ModuleCache/1VEVSXT4LZMYX/_Builtin_stddef_max_align_t-1KLR31KNJ6263.pcm'
+#
+# I doesnt got a reson of it, native build work good
+# 
+
+function compile_module {
+    echo "compile module $2"
+    clang++-14\
+    -std=c++20\
+    -stdlib=libc++\
+    -fmodules\
+    -O3\
+    -fPIC\
+    -Wall\
+    -Wextra\
+    -fmath-errno\
+    -march=native\
+    -ffast-math\
+    -fcxx-exceptions\
+    -fprebuilt-module-path=precompiled/\
+    -c --precompile\
+    $1 -o precompiled/$2.pcm
+}
+
+function compile_source {
+    echo "compile $1"
+    clang++-14\
+    -std=c++20\
+    -stdlib=libc++\
+    -fmodules\
+    -O3\
+    -fPIC\
+    -Wall\
+    -Wextra\
+    -fmath-errno\
+    -march=native\
+    -ffast-math\
+    -fcxx-exceptions\
+    -fprebuilt-module-path=../precompiled/\
+    $1 -c
+}
+
+function link_shared {
+    echo "link shared lib: libmathon.so"
+    clang++-14 -shared -Wl,-soname,libmathon.so.0 -o libmathon.so.0.0\
+    .build/Operators.o\
+    .build/ShareModifier.o\
+    .build/Signatures.o\
+    .build/Utilites.o\
+    .build/Vector2.o\
+    .build/Vector3.o\
+    .build/Vector4.o\
+    .build/Vector2t.o\
+    .build/Vector2d.o\
+    .build/Vector2f.o\
+    .build/Vector2i.o\
+    .build/Vector3t.o\
+    .build/Vector3d.o\
+    .build/Vector3f.o\
+    .build/Vector3i.o\
+    .build/Vector4t.o\
+    .build/Vector4d.o\
+    .build/Vector4f.o\
+    .build/Vector4i.o\
+    -lc
+
+    ln libmathon.so.0.0   libmathon.so.0
+    ln libmathon.so.0     libmathon.so
+    
+    sudo cp libmathon.so.0.0    /usr/lib    
+    sudo cp libmathon.so.0      /usr/lib
+    sudo cp libmathon.so        /usr/lib
+}
+
+function compile {
+    clear
+    mkdir -p precompiled
+    
+    compile_module src/ShareModifier.cppm                   Math.Impl.ShareModifier
+    compile_module src/Utilites.cppm                        Math.Impl.Utilites
+    compile_module src/Signatures.cppm                      Math.Impl.Signatures
+    compile_module src/Operators.cppm                       Math.Impl.Operators
+    compile_module src/Vectors/impl/Vector2.cppm            Math.Impl.Vector2
+    compile_module src/Vectors/impl/Vector3.cppm            Math.Impl.Vector3
+    compile_module src/Vectors/impl/Vector4.cppm            Math.Impl.Vector4
+    compile_module src/Vectors/Vector2/Vector2f.cppm        Math.Vector2f
+    compile_module src/Vectors/Vector2/Vector2d.cppm        Math.Vector2d
+    compile_module src/Vectors/Vector2/Vector2i.cppm        Math.Vector2i
+    compile_module src/Vectors/Vector3/Vector3f.cppm        Math.Vector3f
+    compile_module src/Vectors/Vector3/Vector3d.cppm        Math.Vector3d
+    compile_module src/Vectors/Vector3/Vector3i.cppm        Math.Vector3i
+    compile_module src/Vectors/Vector4/Vector4f.cppm        Math.Vector4f
+    compile_module src/Vectors/Vector4/Vector4d.cppm        Math.Vector4d
+    compile_module src/Vectors/Vector4/Vector4i.cppm        Math.Vector4i
+    compile_module src/Vectors/Vector2/Vector2t.cppm        Math.Vector2
+    compile_module src/Vectors/Vector3/Vector3t.cppm        Math.Vector3
+    compile_module src/Vectors/Vector4/Vector4t.cppm        Math.Vector4
+
+    mkdir -p .build
+    cd .build
+        compile_source ../src/Operators.cppm
+        compile_source ../src/ShareModifier.cppm
+        compile_source ../src/Signatures.cppm
+        compile_source ../src/Utilites.cppm
+        compile_source ../src/Vectors/impl/Vector2.cppm
+        compile_source ../src/Vectors/impl/Vector3.cppm
+        compile_source ../src/Vectors/impl/Vector4.cppm
+        compile_source ../src/Vectors/Vector2/Vector2t.cppm
+        compile_source ../src/Vectors/Vector2/Vector2d.cppm
+        compile_source ../src/Vectors/Vector2/Vector2f.cppm
+        compile_source ../src/Vectors/Vector2/Vector2i.cppm
+        compile_source ../src/Vectors/Vector3/Vector3t.cppm
+        compile_source ../src/Vectors/Vector3/Vector3d.cppm
+        compile_source ../src/Vectors/Vector3/Vector3f.cppm
+        compile_source ../src/Vectors/Vector3/Vector3i.cppm
+        compile_source ../src/Vectors/Vector4/Vector4t.cppm
+        compile_source ../src/Vectors/Vector4/Vector4d.cppm
+        compile_source ../src/Vectors/Vector4/Vector4f.cppm
+        compile_source ../src/Vectors/Vector4/Vector4i.cppm
+    cd ..
+
+    link_shared
+} 
+
+function clean {
+    rm -rf precompiled/ 
+    rm -rf .build/
+    rm -rf .cache/
+}
+
+function help {
+    echo "-r  or --run      = run main"
+    echo "-c  or --clean    = clean all build files"
+    echo "-b  or --build    = build project"
+    echo "-rb or --rebuild  = totaly rebuild all project"
+}
+
+if [[ "$1" == "--clean" || "$1" == "-c" ]]; then
+    clean
+fi
+
+
+if [[ "$1" == "--build" || "$1" == "-b" ]]; then
+    compile
+fi
+
+
+if [[ "$1" == "--rebuild" || "$1" == "-rb" ]]; then
+    clean
+    compile
+fi
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    help    
+fi
+
+if [[ "$2" == "--run" || "$2" == "-r" || "$1" == "" ]]; then
+    clang++-14\
+    -std=c++20\
+    -stdlib=libc++\
+    -fmodules\
+    -O3\
+    -fPIC\
+    -Wall\
+    -Wextra\
+    -fmath-errno\
+    -march=native\
+    -ffast-math\
+    -fcxx-exceptions\
+    -fprebuilt-module-path=precompiled/\
+    -lmathon\
+    main.cpp -o main
+fi
