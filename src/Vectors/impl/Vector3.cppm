@@ -11,20 +11,21 @@ import <cmath>;
 // import std;
 
 template <typename T>
-using vector = mathon::impl::Vector<3, T>;
+using vector = mathon::impl::Vector<3, T, false>;
 
 template <typename T>
-using vector2 = mathon::impl::Vector<2, T>;
+using vector2 = mathon::impl::Vector<2, T, false>;
 
 namespace mathon::impl::operators { struct impl; };
 
 export namespace mathon::impl {
 template <
     no_cvref T
-> class Vector<3, T> {
+> class Vector<3, T, false> {
 template <
     LenghtT l,
-    no_cvref U
+    no_cvref U,
+    bool is_p
 > friend class Vector;
 public:
 using value_type = T;
@@ -485,12 +486,7 @@ vector<T>::xyz(T a, same_dim_vector<vector2> auto&& vec) {
     _z = vec.y();
 }
 
-
-
-
-
-
-template < no_cvref T > constexpr bool 
+template < no_cvref T > constexpr bool
 vector<T>::colinear_to(vector_3 auto&& rhs) const noexcept {
     if((!_x && !rhs._x && _y && rhs._y) 
     || (!_y && !rhs._y && _x && rhs._x)) return true;

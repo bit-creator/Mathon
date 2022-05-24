@@ -6,5 +6,7 @@ export import Math.Vector4i;
 
 export namespace mathon {
     template < typename T >
-        using Vector4 = impl::Vector< 4, T >;
+        using Vector4 = impl::Vector< 4, T, false>;
+    template < typename T >
+        using Point4  = impl::Vector< 4, T, true>;
 };

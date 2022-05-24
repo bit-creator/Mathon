@@ -64,19 +64,32 @@ function link_shared {
     .build/Vector3t.o\
     .build/Vector3d.o\
     .build/Vector3f.o\
-    .build/Vector3i.o\
     .build/Vector4t.o\
+    .build/Vector3i.o\
     .build/Vector4d.o\
     .build/Vector4f.o\
     .build/Vector4i.o\
+    .build/Matrix2.o\
+    .build/Matrix3.o\
+    .build/Matrix4.o\
+    .build/Matrix2t.o\
+    .build/Matrix2d.o\
+    .build/Matrix2f.o\
+    .build/Matrix2i.o\
+    .build/Matrix3t.o\
+    .build/Matrix3d.o\
+    .build/Matrix3f.o\
+    .build/Matrix4t.o\
+    .build/Matrix3i.o\
+    .build/Matrix4d.o\
+    .build/Matrix4f.o\
+    .build/Matrix4i.o\
     -lc
 
     ln libmathon.so.0.0   libmathon.so.0
     ln libmathon.so.0     libmathon.so
     
-    sudo cp libmathon.so.0.0    /usr/lib    
-    sudo cp libmathon.so.0      /usr/lib
-    sudo cp libmathon.so        /usr/lib
+    sudo cp libmathon.so /usr/lib
 }
 
 function compile {
@@ -90,6 +103,9 @@ function compile {
     compile_module src/Vectors/impl/Vector2.cppm            Math.Impl.Vector2
     compile_module src/Vectors/impl/Vector3.cppm            Math.Impl.Vector3
     compile_module src/Vectors/impl/Vector4.cppm            Math.Impl.Vector4
+    # compile_module src/Matrix/impl/Matrix2.cppm             Math.Impl.Matrix2
+    # compile_module src/Matrix/impl/Matrix3.cppm             Math.Impl.Matrix3
+    # compile_module src/Matrix/impl/Matrix4.cppm             Math.Impl.Matrix4
     compile_module src/Vectors/Vector2/Vector2f.cppm        Math.Vector2f
     compile_module src/Vectors/Vector2/Vector2d.cppm        Math.Vector2d
     compile_module src/Vectors/Vector2/Vector2i.cppm        Math.Vector2i
@@ -102,37 +118,68 @@ function compile {
     compile_module src/Vectors/Vector2/Vector2t.cppm        Math.Vector2
     compile_module src/Vectors/Vector3/Vector3t.cppm        Math.Vector3
     compile_module src/Vectors/Vector4/Vector4t.cppm        Math.Vector4
+    # compile_module src/Matrix/Matrix2/Matrix2f.cppm         Math.Matrix2f
+    # compile_module src/Matrix/Matrix2/Matrix2d.cppm         Math.Matrix2d
+    # compile_module src/Matrix/Matrix2/Matrix2i.cppm         Math.Matrix2i
+    # compile_module src/Matrix/Matrix3/Matrix3f.cppm         Math.Matrix3f
+    # compile_module src/Matrix/Matrix3/Matrix3d.cppm         Math.Matrix3d
+    # compile_module src/Matrix/Matrix3/Matrix3i.cppm         Math.Matrix3i
+    # compile_module src/Matrix/Matrix4/Matrix4f.cppm         Math.Matrix4f
+    # compile_module src/Matrix/Matrix4/Matrix4d.cppm         Math.Matrix4d
+    # compile_module src/Matrix/Matrix4/Matrix4i.cppm         Math.Matrix4i
+    # compile_module src/Matrix/Matrix2/Matrix2t.cppm         Math.Matrix2
+    # compile_module src/Matrix/Matrix3/Matrix3t.cppm         Math.Matrix3
+    # compile_module src/Matrix/Matrix4/Matrix4t.cppm         Math.Matrix4
 
     mkdir -p .build
     cd .build
-        compile_source ../src/Operators.cppm
-        compile_source ../src/ShareModifier.cppm
-        compile_source ../src/Signatures.cppm
-        compile_source ../src/Utilites.cppm
-        compile_source ../src/Vectors/impl/Vector2.cppm
-        compile_source ../src/Vectors/impl/Vector3.cppm
-        compile_source ../src/Vectors/impl/Vector4.cppm
-        compile_source ../src/Vectors/Vector2/Vector2t.cppm
-        compile_source ../src/Vectors/Vector2/Vector2d.cppm
-        compile_source ../src/Vectors/Vector2/Vector2f.cppm
-        compile_source ../src/Vectors/Vector2/Vector2i.cppm
-        compile_source ../src/Vectors/Vector3/Vector3t.cppm
-        compile_source ../src/Vectors/Vector3/Vector3d.cppm
-        compile_source ../src/Vectors/Vector3/Vector3f.cppm
-        compile_source ../src/Vectors/Vector3/Vector3i.cppm
-        compile_source ../src/Vectors/Vector4/Vector4t.cppm
-        compile_source ../src/Vectors/Vector4/Vector4d.cppm
-        compile_source ../src/Vectors/Vector4/Vector4f.cppm
-        compile_source ../src/Vectors/Vector4/Vector4i.cppm
+        # compile_source ../src/Operators.cppm
+        # compile_source ../src/ShareModifier.cppm
+        # compile_source ../src/Signatures.cppm
+        # compile_source ../src/Utilites.cppm
+        # compile_source ../src/Matrix/impl/Matrix2.cppm
+        # compile_source ../src/Matrix/impl/Matrix3.cppm
+        # compile_source ../src/Matrix/impl/Matrix4.cppm
+        # compile_source ../src/Vectors/impl/Vector2.cppm
+        # compile_source ../src/Vectors/impl/Vector3.cppm
+        # compile_source ../src/Vectors/impl/Vector4.cppm
+        # compile_source ../src/Matrix/Matrix2/Matrix2t.cppm
+        # compile_source ../src/Matrix/Matrix2/Matrix2d.cppm
+        # compile_source ../src/Matrix/Matrix2/Matrix2f.cppm
+        # compile_source ../src/Matrix/Matrix2/Matrix2i.cppm
+        # compile_source ../src/Matrix/Matrix3/Matrix3t.cppm
+        # compile_source ../src/Matrix/Matrix3/Matrix3d.cppm
+        # compile_source ../src/Matrix/Matrix3/Matrix3f.cppm
+        # compile_source ../src/Matrix/Matrix3/Matrix3i.cppm
+        # compile_source ../src/Matrix/Matrix4/Matrix4t.cppm
+        # compile_source ../src/Matrix/Matrix4/Matrix4d.cppm
+        # compile_source ../src/Matrix/Matrix4/Matrix4f.cppm
+        # compile_source ../src/Matrix/Matrix4/Matrix4i.cppm
+        # compile_source ../src/Vectors/Vector2/Vector2t.cppm
+        # compile_source ../src/Vectors/Vector2/Vector2d.cppm
+        # compile_source ../src/Vectors/Vector2/Vector2f.cppm
+        # compile_source ../src/Vectors/Vector2/Vector2i.cppm
+        # compile_source ../src/Vectors/Vector3/Vector3t.cppm
+        # compile_source ../src/Vectors/Vector3/Vector3d.cppm
+        # compile_source ../src/Vectors/Vector3/Vector3f.cppm
+        # compile_source ../src/Vectors/Vector3/Vector3i.cppm
+        # compile_source ../src/Vectors/Vector4/Vector4t.cppm
+        # compile_source ../src/Vectors/Vector4/Vector4d.cppm
+        # compile_source ../src/Vectors/Vector4/Vector4f.cppm
+        # compile_source ../src/Vectors/Vector4/Vector4i.cppm
     cd ..
 
-    link_shared
+    # link_shared
 } 
 
 function clean {
-    rm -rf precompiled/ 
+    rm -rf precompiled/
     rm -rf .build/
     rm -rf .cache/
+    rm -rf libmathon.so/
+    rm -rf libmathon.so.0/
+    rm -rf libmathon.so.0.0/
+    
 }
 
 function help {

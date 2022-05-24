@@ -7,19 +7,14 @@ import <concepts>;
 
 export namespace mathon::impl {
     template < 
-        LenghtT rows, 
-        LenghtT cols,
-        no_cvref T
-    > class Matrix;
-
-    template < 
         LenghtT dims, 
         no_cvref T
-    > class QuadMatrix;
+    > class Matrix;
         
     template < 
         LenghtT dims,
-        no_cvref T
+        no_cvref T,
+        bool use_homogeneus =false // if supported from implimentation same to `is_point`
     > class Vector;
 
     template < 
