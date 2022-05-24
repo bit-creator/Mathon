@@ -922,7 +922,7 @@ void ConstructibleTests() {
 
     TEST(constructByValue) {
         mathon::Vector4i vec(4.0);
-        RET4(vec, 4, 4, 4, 4)
+        RET4(vec, 4, 4, 4, 0)
     };
 
     TEST(constructByPair) {
@@ -933,12 +933,7 @@ void ConstructibleTests() {
     TEST(constructByVector) {
         mathon::Vector4i vec(mth::Vector2f(6, 8));
         RET4(vec, 6, 8, 0, 0)
-    };    
-
-    TEST(constructByTwoVector) {
-        mathon::Vector4i vec(mth::Vector2f(6, 8), mth::Vector2f(5, 3));
-        RET4(vec, 6, 8, 5, 3)
-    };    
+    };
     
     TEST(constructByVectorWithVal) {
         mth::Vector2f vec2f(6, 8);
@@ -968,7 +963,6 @@ void ConstructibleTests() {
     CHECK(constructByValue)
     CHECK(constructByPair)
     CHECK(constructByVector)
-    CHECK(constructByTwoVector)
     CHECK(constructByVectorWithVal)
     CHECK(constructByVectorWithVal2)
     CHECK(copyConstruct)
@@ -980,13 +974,13 @@ void AssigmentTests() {
         mth::Vector4d vec{3.0};
         mth::Vector4f vec2{0, 6, 8};
         vec2 = vec;
-        RET4(vec2, 3.0, 3.0, 3.0, 3.0)
+        RET4(vec2, 3.0, 3.0, 3.0, 0.0)
     };
 
     TEST(Vec4MoveAssigment) {
         mth::Vector4f vec2{0, 6, 8};
         vec2 = mth::Vector4d{3.0};
-        RET4(vec2, 3.0, 3.0, 3.0, 3.0)
+        RET4(vec2, 3.0, 3.0, 3.0, 0.0)
     };
 
     TEST(Vec4SelfAssigment) {

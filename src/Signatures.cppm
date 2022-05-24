@@ -13,7 +13,8 @@ export namespace mathon::impl {
         
     template < 
         LenghtT dims,
-        no_cvref T
+        no_cvref T,
+        bool use_homogeneus =false // if supported from implimentation same to `is_point`
     > class Vector;
 
     template < 

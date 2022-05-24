@@ -11,20 +11,21 @@ import <cmath>;
 // import std;
 
 template <typename T>
-using vector = mathon::impl::Vector<3, T>;
+using vector = mathon::impl::Vector<3, T, false>;
 
 template <typename T>
-using vector2 = mathon::impl::Vector<2, T>;
+using vector2 = mathon::impl::Vector<2, T, false>;
 
 namespace mathon::impl::operators { struct impl; };
 
 export namespace mathon::impl {
 template <
     no_cvref T
-> class Vector<3, T> {
+> class Vector<3, T, false> {
 template <
     LenghtT l,
-    no_cvref U
+    no_cvref U,
+    bool is_p
 > friend class Vector;
 public:
 using value_type = T;

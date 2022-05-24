@@ -103,9 +103,9 @@ function compile {
     compile_module src/Vectors/impl/Vector2.cppm            Math.Impl.Vector2
     compile_module src/Vectors/impl/Vector3.cppm            Math.Impl.Vector3
     compile_module src/Vectors/impl/Vector4.cppm            Math.Impl.Vector4
-    compile_module src/Matrix/impl/Matrix2.cppm             Math.Impl.Matrix2
-    compile_module src/Matrix/impl/Matrix3.cppm             Math.Impl.Matrix3
-    compile_module src/Matrix/impl/Matrix4.cppm             Math.Impl.Matrix4
+    # compile_module src/Matrix/impl/Matrix2.cppm             Math.Impl.Matrix2
+    # compile_module src/Matrix/impl/Matrix3.cppm             Math.Impl.Matrix3
+    # compile_module src/Matrix/impl/Matrix4.cppm             Math.Impl.Matrix4
     compile_module src/Vectors/Vector2/Vector2f.cppm        Math.Vector2f
     compile_module src/Vectors/Vector2/Vector2d.cppm        Math.Vector2d
     compile_module src/Vectors/Vector2/Vector2i.cppm        Math.Vector2i
@@ -118,18 +118,18 @@ function compile {
     compile_module src/Vectors/Vector2/Vector2t.cppm        Math.Vector2
     compile_module src/Vectors/Vector3/Vector3t.cppm        Math.Vector3
     compile_module src/Vectors/Vector4/Vector4t.cppm        Math.Vector4
-    compile_module src/Matrix/Matrix2/Matrix2f.cppm         Math.Matrix2f
-    compile_module src/Matrix/Matrix2/Matrix2d.cppm         Math.Matrix2d
-    compile_module src/Matrix/Matrix2/Matrix2i.cppm         Math.Matrix2i
-    compile_module src/Matrix/Matrix3/Matrix3f.cppm         Math.Matrix3f
-    compile_module src/Matrix/Matrix3/Matrix3d.cppm         Math.Matrix3d
-    compile_module src/Matrix/Matrix3/Matrix3i.cppm         Math.Matrix3i
-    compile_module src/Matrix/Matrix4/Matrix4f.cppm         Math.Matrix4f
-    compile_module src/Matrix/Matrix4/Matrix4d.cppm         Math.Matrix4d
-    compile_module src/Matrix/Matrix4/Matrix4i.cppm         Math.Matrix4i
-    compile_module src/Matrix/Matrix2/Matrix2t.cppm         Math.Matrix2
-    compile_module src/Matrix/Matrix3/Matrix3t.cppm         Math.Matrix3
-    compile_module src/Matrix/Matrix4/Matrix4t.cppm         Math.Matrix4
+    # compile_module src/Matrix/Matrix2/Matrix2f.cppm         Math.Matrix2f
+    # compile_module src/Matrix/Matrix2/Matrix2d.cppm         Math.Matrix2d
+    # compile_module src/Matrix/Matrix2/Matrix2i.cppm         Math.Matrix2i
+    # compile_module src/Matrix/Matrix3/Matrix3f.cppm         Math.Matrix3f
+    # compile_module src/Matrix/Matrix3/Matrix3d.cppm         Math.Matrix3d
+    # compile_module src/Matrix/Matrix3/Matrix3i.cppm         Math.Matrix3i
+    # compile_module src/Matrix/Matrix4/Matrix4f.cppm         Math.Matrix4f
+    # compile_module src/Matrix/Matrix4/Matrix4d.cppm         Math.Matrix4d
+    # compile_module src/Matrix/Matrix4/Matrix4i.cppm         Math.Matrix4i
+    # compile_module src/Matrix/Matrix2/Matrix2t.cppm         Math.Matrix2
+    # compile_module src/Matrix/Matrix3/Matrix3t.cppm         Math.Matrix3
+    # compile_module src/Matrix/Matrix4/Matrix4t.cppm         Math.Matrix4
 
     mkdir -p .build
     cd .build
