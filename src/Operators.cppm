@@ -144,6 +144,74 @@ namespace mathon::impl::operators {
         return out;
         }
 
+// VECTOR_4
+        template < bool modify, vector_4 T >
+        static constexpr return_type<modify, std::remove_cvref_t<T>>
+        reverse(T&& vec) noexcept {
+            if constexpr (modify) {
+                vec._x = -vec._x;
+                vec._y = -vec._y;
+                vec._z = -vec._z;
+            } else return {-vec._x, -vec._y, -vec._z};
+        }
+
+        template < vector_4 T, vector_4 U >
+        static constexpr common_value_type<T, U>
+        multiply(T&& lhs, U&& rhs) noexcept {
+            return lhs._x * rhs._x + lhs._y * rhs._y + lhs._z * rhs._z;
+        }
+
+        template <
+            bool modify, typename Op, vector_4 T, suitable_value_type<T> U,
+            typename Ret = return_type<modify, std::remove_cvref_t<T>>
+        > static constexpr Ret
+        calculateScalar(T&& lhs, U&& rhs) {
+            if constexpr (modify) {
+                lhs._x = std::invoke(Op{}, lhs._x, rhs);
+                lhs._y = std::invoke(Op{}, lhs._y, rhs);
+                lhs._z = std::invoke(Op{}, lhs._z, rhs);
+            } else return { 
+                std::invoke(Op{}, lhs._x, rhs),
+                std::invoke(Op{}, lhs._y, rhs),
+                std::invoke(Op{}, lhs._z, rhs)
+            };    
+        }
+
+        template <
+            bool modify, typename Op, vector_4 T, vector_4 U,
+            typename Ret = return_type<modify, Vector<3, common_value_type<T, U>>>
+        > static constexpr Ret
+        calculate(T&& lhs, U&& rhs) {
+            if constexpr (modify) {
+                lhs._x = std::invoke(Op{}, lhs._x, rhs._x);
+                lhs._y = std::invoke(Op{}, lhs._y, rhs._y);
+                lhs._z = std::invoke(Op{}, lhs._z, rhs._z);
+            } else return { 
+                std::invoke(Op{}, lhs._x, rhs._x),
+                std::invoke(Op{}, lhs._y, rhs._y),
+                std::invoke(Op{}, lhs._z, rhs._z)
+            };    
+        }
+
+        template < vector_4 T, vector_4 U >
+        static constexpr bool
+        equal(T&& lhs, U&& rhs) noexcept {
+            return  lhs._x == rhs._x?
+                    lhs._y == rhs._y?
+                    lhs._z == rhs._z?
+                    true: false: false: false;
+        }
+
+        template < vector_4 T >
+        static constexpr std::ostream&
+        dump(std::ostream& out, T&& vec) noexcept {
+        out << "dump:\n\tx = "
+        << vec.x() << "\n\ty = "
+        << vec.y() << "\n\tz = "
+        << vec.z() << std::endl;
+        return out;
+        }
+
     };
 };
 

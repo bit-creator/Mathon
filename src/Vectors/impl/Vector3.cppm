@@ -485,12 +485,7 @@ vector<T>::xyz(T a, same_dim_vector<vector2> auto&& vec) {
     _z = vec.y();
 }
 
-
-
-
-
-
-template < no_cvref T > constexpr bool 
+template < no_cvref T > constexpr bool
 vector<T>::colinear_to(vector_3 auto&& rhs) const noexcept {
     if((!_x && !rhs._x && _y && rhs._y) 
     || (!_y && !rhs._y && _x && rhs._x)) return true;

@@ -7,15 +7,9 @@ import <concepts>;
 
 export namespace mathon::impl {
     template < 
-        LenghtT rows, 
-        LenghtT cols,
-        no_cvref T
-    > class Matrix;
-
-    template < 
         LenghtT dims, 
         no_cvref T
-    > class QuadMatrix;
+    > class Matrix;
         
     template < 
         LenghtT dims,
