@@ -21,6 +21,24 @@ void run() {
 namespace Matrix4Test {
 namespace mth = mathon;
 
+void quat() {
+    TEST(copy) {
+        mth::Quaternion4f q(3, {1, 0, 0});
+        mth::Quaternion4f p = q;
+
+        return true;
+    };
+
+    TEST(move) {
+        mth::Quaternion4f q(3, {1, 0, 0});
+        mth::Quaternion4f p = mth::Quaternion4f(3, {1, 0, 0});
+
+        return true;
+    };
+
+    CHECK(copy)
+}
+
 void operators() {
     TEST(multiplication) {
         mth::Matrix4f mat;
@@ -74,6 +92,10 @@ void operators() {
 }
 
 void run() {
+    TEST_ENTITY(QUATERNION)
+    CHECK_GROUP(quat)
+
+
     TEST_ENTITY(MATRIX_4)
     CHECK_GROUP(operators)
 }
