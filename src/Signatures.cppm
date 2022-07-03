@@ -22,15 +22,20 @@ export namespace mathon::impl {
         no_cvref T
     > class Color;
 
-    template < 
-        no_cvref T
-    > class Quaternion;
-
     template < typename Vec >
-    concept correct_vector = 
+    concept correct_vector =
         has_value_type<Vec> && has_dimensions<Vec>
         && pure_same_as < Vec, Vector < dimensions<Vec>, value_type<Vec> >
     >;
+
+    template < typename Mat >
+    concept correct_matrix =
+        has_value_type<Mat> && has_dimensions<Mat>
+        && pure_same_as < Mat, Matrix < dimensions<Mat>, value_type<Mat> >
+    >;
+
+    template < typename Prim >
+    concept math_primitive = correct_vector<Prim> || correct_matrix<Prim>;
 
     template < typename value, typename Vec >
     concept suitable_value_type = correct_vector<Vec> 
@@ -44,6 +49,9 @@ export namespace mathon::impl {
 
     template < typename Vec >
     concept vector_4 = correct_vector<Vec> && equal<dimensions<Vec>, 4>;
+
+    template < typename Mat >
+    concept matrix_4 = correct_matrix<Mat> && equal<dimensions<Mat>, 4>;
 
     template <
         typename Vec,

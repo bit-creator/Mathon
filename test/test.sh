@@ -1,5 +1,9 @@
 #!/bin/bash
 
+cd ..
+./Mathon -rb
+cd test
+
 rm -rf main
 
  clang++-14\

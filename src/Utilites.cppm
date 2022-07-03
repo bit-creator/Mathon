@@ -48,7 +48,7 @@ export namespace mathon::impl {
     template < has_value_type T, has_value_type U >
     using common_value_type = std::remove_cvref_t<std::common_type_t<value_type<T>, value_type<U>>>;
 
-    template < has_dimensions T > 
+    template < has_dimensions T >
     constexpr inline LenghtT dimensions = std::remove_cvref_t<T>::dimensions;
 
     struct HelperData {

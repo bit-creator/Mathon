@@ -1,6 +1,6 @@
-export module Math.Matrix3i;
-export import Math.Impl.Matrix3;
+export module Math.Matrix4i;
+export import Math.Impl.Matrix4;
 
 export namespace mathon {
-    using Matrix3i = impl::Matrix<3, int>;
+    using Matrix4i = impl::Matrix<4, int>;
 };

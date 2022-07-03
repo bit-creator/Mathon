@@ -30,11 +30,10 @@ template <
     no_cvref T,
     bool is_point_val
 > class Vector<4, T, is_point_val> {
-template <
-    LenghtT l,
-    no_cvref U,
-    bool is_p
-> friend class Vector;
+template < LenghtT, no_cvref >          friend class Matrix;
+template < LenghtT, no_cvref, bool >    friend class Vector;
+template < no_cvref >                   friend class Quaternion;
+
 public:
 using value_type = T;
 using vector     = vector<value_type, is_point_val>;

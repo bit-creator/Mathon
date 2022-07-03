@@ -36,22 +36,22 @@ static Stats stats{0, 0};
                                   && name._22() == right._22();
 
 
-#define RET_MAT4(name, right) return name._00() == right._00() \
-                                  && name._01() == right._01() \
-                                  && name._02() == right._02() \
-                                  && name._03() == right._03() \
-                                  && name._10() == right._10() \
-                                  && name._11() == right._11() \
-                                  && name._12() == right._12() \
-                                  && name._13() == right._13() \
-                                  && name._20() == right._20() \
-                                  && name._21() == right._21() \
-                                  && name._22() == right._22() \
-                                  && name._23() == right._23() \
-                                  && name._30() == right._30() \
-                                  && name._31() == right._31() \
-                                  && name._32() == right._32() \
-                                  && name._33() == right._33();
+#define RET_MAT4(name, right) return std::abs(name._00_() - right._00_()) < 0.001 \
+                                  && std::abs(name._01_() - right._01_()) < 0.001 \
+                                  && std::abs(name._02_() - right._02_()) < 0.001 \
+                                  && std::abs(name._03_() - right._03_()) < 0.001 \
+                                  && std::abs(name._10_() - right._10_()) < 0.001 \
+                                  && std::abs(name._11_() - right._11_()) < 0.001 \
+                                  && std::abs(name._12_() - right._12_()) < 0.001 \
+                                  && std::abs(name._13_() - right._13_()) < 0.001 \
+                                  && std::abs(name._20_() - right._20_()) < 0.001 \
+                                  && std::abs(name._21_() - right._21_()) < 0.001 \
+                                  && std::abs(name._22_() - right._22_()) < 0.001 \
+                                  && std::abs(name._23_() - right._23_()) < 0.001 \
+                                  && std::abs(name._30_() - right._30_()) < 0.001 \
+                                  && std::abs(name._31_() - right._31_()) < 0.001 \
+                                  && std::abs(name._32_() - right._32_()) < 0.001 \
+                                  && std::abs(name._33_() - right._33_()) < 0.001;
 
 #define CHECK(arg) if(arg()) { SUCSESS(arg) } else { ERROR(arg) }
 #define CHECK_GROUP(arg) START_GROUP(arg) arg(); END_GROUP(arg)

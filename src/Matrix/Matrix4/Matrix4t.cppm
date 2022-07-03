@@ -1,10 +1,10 @@
-export module Math.Matrix3;
+export module Math.Matrix4;
 
-export import Math.Matrix3f;
-export import Math.Matrix3d;
-export import Math.Matrix3i;
+export import Math.Matrix4f;
+export import Math.Matrix4d;
+export import Math.Matrix4i;
 
 export namespace mathon {
     template < typename T >
-        using Matrix3 = impl::Matrix< 3, T >;
+        using Matrix4 = impl::Matrix< 4, T >;
 };
