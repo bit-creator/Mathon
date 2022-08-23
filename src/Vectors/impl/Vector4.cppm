@@ -1,6 +1,6 @@
 export module Math.Impl.Vector4;
-export import Math.Impl.Vector3;
-export import Math.Impl.Vector2;
+import Math.Impl.Vector3;
+import Math.Impl.Vector2;
 export import Math.Impl.Operators;
 export import Math.Impl.Signatures;
 

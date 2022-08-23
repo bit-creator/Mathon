@@ -153,6 +153,9 @@ public:
     constexpr void lookAt(vector3<T> _trans);
 
     constexpr void make_model(vector3<T> _scale, Quaternion<T> _rotate, vector3<T> _trans);
+    constexpr void make_perspective(float fovy, float aspect, float near, float far);
+    
+    constexpr matrix inverse();
 
     friend operators::impl;
 
@@ -277,6 +280,31 @@ Matrix<4, T>::make_model(vector3<T> _scale, Quaternion<T> _rotate, vector3<T> _t
         _23 = 0;
         _33 = 1;
     }
+}
+
+template < no_cvref T > constexpr void
+Matrix<4, T>::make_perspective(float fovy, float aspect, float near, float far) {
+    *this = Matrix<4, T>();
+	T const tanHalfFovy = tan(fovy / static_cast<T>(2));
+    if constexpr (is_row_order) {
+    	_00 = static_cast<T>(1) / (aspect * tanHalfFovy);
+    	_11 = static_cast<T>(1) / (tanHalfFovy);
+    	_22 = - (far + near) / (far - near);
+    	_32 = - static_cast<T>(1);
+    	_23 = - (static_cast<T>(2) * far * near) / (far - near);
+    } else {
+        _00 = static_cast<T>(1) / (aspect * tanHalfFovy);
+    	_11 = static_cast<T>(1) / (tanHalfFovy);
+    	_22 = - (far + near) / (far - near);
+    	_23 = - static_cast<T>(1);
+    	_32 = - (static_cast<T>(2) * far * near) / (far - near);
+    }
+}
+
+
+template < no_cvref T > constexpr Matrix<4, T>
+Matrix<4, T>::inverse() {
+    
 }
 
 template < no_cvref T > constexpr T

@@ -11,7 +11,7 @@ export namespace mathon::impl {
         no_cvref T
     > class Matrix;
         
-    template < 
+    template <
         LenghtT dims,
         no_cvref T,
         bool use_homogeneus =false // if supported from implimentation same to `is_point`

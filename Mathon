@@ -16,8 +16,7 @@ function compile_module {
     -std=c++20\
     -stdlib=libc++\
     -fmodules\
-    -O3\
-    -fPIC\
+    -g3\
     -Wall\
     -Wextra\
     -fmath-errno\
@@ -135,8 +134,8 @@ function compile {
     compile_module src/Matrix/Matrix3/Matrix3t.cppm         Math.Matrix3
     compile_module src/Matrix/Matrix4/Matrix4t.cppm         Math.Matrix4
 
-    mkdir -p .build
-    cd .build
+    # mkdir -p .build
+    # cd .build
         # compile_source ../src/Operators.cppm
         # compile_source ../src/ShareModifier.cppm
         # compile_source ../src/Signatures.cppm
@@ -171,7 +170,7 @@ function compile {
         # compile_source ../src/Vectors/Vector4/Vector4d.cppm
         # compile_source ../src/Vectors/Vector4/Vector4f.cppm
         # compile_source ../src/Vectors/Vector4/Vector4i.cppm
-    cd ..
+    # cd ..
 
     # link_shared
 } 
