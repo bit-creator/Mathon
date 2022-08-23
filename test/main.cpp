@@ -3,6 +3,7 @@ import Math.Vector3;
 import Math.Vector2;
 import Math.Matrix4;
 import Math.Quaternion;
+import <iostream>;
 
 #include "VectorTest.hpp"
 #include "MatrixTest.hpp"
@@ -37,7 +38,8 @@ int main() {
 
     // std::cout << glm::to_string(glm::toMat4(rot)) << std::endl;
     // std::cout << glm::to_string(rot) << std::endl;
-    std::cout << glm::to_string(mat) << std::endl;
+    // std::cout << glm::to_string(mat) << std::endl;
+    std::cout << glm::to_string(glm::inverse(mat)) << std::endl;
 
     // std::cout << mat[0][1] << std::endl;
 }

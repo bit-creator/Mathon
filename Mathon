@@ -16,7 +16,8 @@ function compile_module {
     -std=c++20\
     -stdlib=libc++\
     -fmodules\
-    -g3\
+    -O3\
+    -fPIC\
     -Wall\
     -Wextra\
     -fmath-errno\

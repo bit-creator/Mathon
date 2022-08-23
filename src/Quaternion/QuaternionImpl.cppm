@@ -33,7 +33,7 @@ public:
     constexpr Quaternion(value_type angle, Axis<T> axis);
 
     Quaternion(const Quaternion&) noexcept =default;
-    Quaternion(Quaternion&&) noexcept =default;
+    // Quaternion(Quaternion&&) noexcept =default;
     Quaternion(Quaternion&& oth) noexcept
         : _angle(oth._angle), _axis(oth._axis) {};
 

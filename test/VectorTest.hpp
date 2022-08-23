@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "simpleFrameWork.hpp"
 
 namespace Vector2Test {

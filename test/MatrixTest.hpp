@@ -85,10 +85,39 @@ void operators() {
 
         RET_MAT4(mat, correct_mat)
     };
+
+    TEST(det) {
+        mth::Vector3f scale(2, 6, 8);
+        mth::Vector3f translate(10, 12, 18);
+        mth::Quaternion4f quat(4, {1, 1, 1});
+
+        mth::Matrix4f mat{scale, quat, translate};
+
+        return (mat.det() - 1671.09) < 0.1;
+    };
+
+    TEST(inverse) {
+        mth::Vector3f scale(2, 6, 8);
+        mth::Vector3f translate(10, 12, 18);
+        mth::Quaternion4f quat(4, {1, 1, 1});
+
+        mth::Matrix4f mat{scale, quat, translate};
+
+        mth::Matrix4f correct_mat = {
+            0.090818, 0.075443, 0.045713, -0.000000,
+            0.182853, 0.030273, 0.056582, -0.000000,
+            0.226329, 0.060951, 0.022705, 0.000000,
+            -7.176338, -2.214819, -1.544801, 1.000000
+        };
+
+        RET_MAT4(mat.inverse(), correct_mat)
+    };
   
     CHECK(multiplication)
     CHECK(multiplication2)
     CHECK(make_model)
+    CHECK(det)
+    CHECK(inverse)
 }
 
 void run() {
